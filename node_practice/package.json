@@ -1,0 +1,11 @@
+{
+  "name": "node_practice",
+  "version": "1.0.0",
+  "description": "This is a simple node practice folder",
+  "main": "20240302.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Wong",
+  "license": "ISC"
+}

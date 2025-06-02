@@ -1,4 +1,4 @@
-const cowsay = require("cowsay");
+const cowsay = require("yasuna_14.cow");
 
 console.log(
   cowsay.say({

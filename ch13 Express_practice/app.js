@@ -1,10 +1,17 @@
 const express = require("express"); //我們require express，並給予我們一個function
 const app = express(); //這邊把執行express function 得到的object 命名為app
 
+//midleware 寫法
+app.use((req, res, next) => {
+  console.log("正在啟動midleware...");
+  next();
+});
+
 //需要middleware，不然post拿到東西會呈現Undifined
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //extend =擴展
 
+//Route
 //Http request, GET, POST, PUT, DELETE
 app.get("/", (req, res) => {
   res.send("Welcome"); //送給用戶端
@@ -36,6 +43,12 @@ app.get("/ex3", (req, res) => {
 
 app.get("/actualExample", (req, res) => {
   res.send("真正的資源"); //真正的資源
+});
+
+//練習status code
+app.get("*", (req, res) => {
+  res.status(404).send("錯誤頁面...");
+  //return res object method chaining
 });
 
 //練習 req.body

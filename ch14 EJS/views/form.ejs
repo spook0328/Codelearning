@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <meta name="author" content="Eric Wong" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%# 練習ejs 處理 form %>
+    <!-- <form action="/exm" method="get">
+      <label for="name">名稱:</label>
+      <input type="text " id="name" name="name" />
+      <label for="age">年齡</label>
+      <input type="number" id="age" name="age" />
+      <button>送出表單</button>
+    </form> -->
+    <table>
+      <tr>
+        <th>名稱</th>
+        <th>評價</th>
+        <th>熱門程度</th>
+      </tr>
+      <% languages.forEach(lang => {%>
+      <tr>
+        <td><%= lang.name %></td>
+        <td><%= lang.rating %></td>
+        <td><%= lang.trending %></td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>

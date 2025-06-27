@@ -10,7 +10,7 @@ const studentSchema = new Schema({
     min: [0, "年齡不能小於0..."],
   },
   major: { type: String },
-  scholarShip: {
+  scholarship: {
     merit: { type: Number, min: 0, max: [5000, "數目太大了...."] },
     other: { type: Number, min: 0, default: 0 },
   },

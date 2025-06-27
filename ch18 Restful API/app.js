@@ -79,7 +79,7 @@ app.put("/students/:_id", async (req, res) => {
     );
     res.send({ msg: "成功更新資料!", updatedData: newData });
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send(e.message);
   }
 });
 
@@ -116,7 +116,19 @@ app.patch("/students/:_id", async (req, res) => {
       res.send({ msg: "成功更新資料!", updatedData: newData });
     }
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send(e.message);
+  }
+});
+
+//Delete
+app.delete("/students/:_id", async (req, res) => {
+  try {
+    let { _id } = req.params;
+    let deleteResult = await Student.deleteOne({ _id });
+    return res.send(deleteResult);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send("無法刪除學生資料");
   }
 });
 

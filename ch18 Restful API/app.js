@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Student = require("./models/student");
+//cors 用法
+const cors = require("cors");
 
 //連接到mongooseDB
 mongoose
@@ -17,6 +19,7 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); //現在可以開始接受同台電腦來的請求
 
 //Get找學生資料
 app.get("/students", async (req, res) => {

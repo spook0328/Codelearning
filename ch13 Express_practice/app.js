@@ -11,6 +11,45 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //extend =擴展
 
+//middleware 除了放在route之前，也可以放在route內部的path及callbackFN之間。
+function myMiddleware(req, res, next) {
+  console.log("正在執行myMiddleware...");
+  next();
+}
+
+//另外的寫法，直接把Middleware寫到route裡面。就不用再寫一個function的話。
+// app.get(
+//   "/students",
+//   [
+//     (req, res, next) => {
+//       console.log("正在執行myMiddleware...");
+//       next();
+//     },
+//     (req, res, next) => {
+//       console.log("正在執行myMiddleware2...");
+//       next();
+//     },
+//   ],
+//   async (req, res) => {
+//     try {
+//       let studentData = await Student.find({}).exec();
+//       return res.send(studentData);
+//     } catch (e) {
+//       return res.status(500).send("尋找資料產生錯誤");
+//     }
+//   }
+// );
+
+//Get找學生資料
+app.get("/students", myMiddleware, async (req, res) => {
+  try {
+    let studentData = await Student.find({}).exec();
+    return res.send(studentData);
+  } catch (e) {
+    return res.status(500).send("尋找資料產生錯誤");
+  }
+});
+
 //Route
 //Http request, GET, POST, PUT, DELETE
 app.get("/", (req, res) => {

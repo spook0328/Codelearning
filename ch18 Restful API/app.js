@@ -21,8 +21,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); //現在可以開始接受同台電腦來的請求
 
+//middleware 除了放在route之前，也可以放在route內部的path及callbackFN之間。
+function myMiddleware(req, res, next) {
+  console.log("正在執行myMiddleware...");
+  next();
+}
+
+//另外的寫法，直接把Middleware寫到route裡面。就不用再寫一個function的話。
+app.get("/students", async (req, res, next) => {
+  try {
+    let studentData = await Student.find({}).exec();
+    // return res.send(studentData);
+    return res.render("students", { studentData });
+  } catch (e) {
+    // return res.status(500).send("尋找資料產生錯誤");
+    next(e); //直接把錯誤訊息往下，由最下面的Middleware傳出
+  }
+});
+
 //Get找學生資料
-app.get("/students", async (req, res) => {
+app.get("/students", myMiddleware, async (req, res) => {
   try {
     let studentData = await Student.find({}).exec();
     return res.send(studentData);
@@ -32,13 +50,14 @@ app.get("/students", async (req, res) => {
 });
 
 //找特定ID學生
-app.get("/students/:_id", async (req, res) => {
+app.get("/students/:_id", async (req, res, next) => {
   let { _id } = req.params;
   try {
     let foundStudent = await Student.findOne({ _id }).exec();
     return res.send(foundStudent);
   } catch (e) {
-    return res.status(500).send("尋找資料產生錯誤");
+    // return res.status(500).send("尋找資料產生錯誤");
+    next(e);
   }
 });
 
@@ -130,9 +149,12 @@ app.delete("/students/:_id", async (req, res) => {
     let deleteResult = await Student.deleteOne({ _id });
     return res.send(deleteResult);
   } catch (e) {
-    console.log(e);
     return res.status(500).send("無法刪除學生資料");
   }
+});
+
+app.use((err, req, res, next) => {
+  return res.status(400).send(err);
 });
 
 //監聽

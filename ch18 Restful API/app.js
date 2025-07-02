@@ -154,7 +154,8 @@ app.delete("/students/:_id", async (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  return res.status(400).send(err);
+  console.log("正在使用這個middleware");
+  return res.status(400).render("student-not-found");
 });
 
 //監聽

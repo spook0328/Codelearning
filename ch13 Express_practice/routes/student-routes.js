@@ -1,26 +1,7 @@
+//這是要測試Express.router使用的
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
+const router = express.Router();
 const Student = require("./models/student");
-
-//cors 用法
-const cors = require("cors");
-
-//連接到mongooseDB
-mongoose
-  .connect("mongodb://localhost:27017/testDB")
-  .then(() => {
-    console.log("成功連結mongodb...");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
-//middleware
-app.set("view engine", "ejs");
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors()); //現在可以開始接受同台電腦來的請求
 
 //middleware 除了放在route之前，也可以放在route內部的path及callbackFN之間。
 function myMiddleware(req, res, next) {
@@ -28,20 +9,8 @@ function myMiddleware(req, res, next) {
   next();
 }
 
-//另外的寫法，直接把Middleware寫到route裡面。就不用再寫一個function的話。
-app.get("/students", async (req, res, next) => {
-  try {
-    let studentData = await Student.find({}).exec();
-    // return res.send(studentData);
-    return res.render("students", { studentData });
-  } catch (e) {
-    // return res.status(500).send("尋找資料產生錯誤");
-    next(e); //直接把錯誤訊息往下，由最下面的Middleware傳出
-  }
-});
-
 //Get找學生資料
-app.get("/students", myMiddleware, async (req, res) => {
+router.get("/", myMiddleware, async (req, res) => {
   try {
     let studentData = await Student.find({}).exec();
     return res.send(studentData);
@@ -51,7 +20,7 @@ app.get("/students", myMiddleware, async (req, res) => {
 });
 
 //找特定ID學生
-app.get("/students/:_id", async (req, res, next) => {
+router.get("/:_id", async (req, res, next) => {
   let { _id } = req.params;
   try {
     let foundStudent = await Student.findOne({ _id }).exec();
@@ -63,7 +32,7 @@ app.get("/students/:_id", async (req, res, next) => {
 });
 
 //Post 創建新學生資料
-app.post("/students", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     let { name, age, major, merit, other } = req.body;
     let newStudent = new Student({
@@ -84,7 +53,7 @@ app.post("/students", async (req, res) => {
 });
 
 //Put 修改資料，修改後會直接覆蓋成為新資料
-app.put("/students/:_id", async (req, res) => {
+router.put("/:_id", async (req, res) => {
   try {
     let { _id } = req.params;
     let { name, age, major, merit, other } = req.body;
@@ -120,7 +89,7 @@ class NewData {
 }
 
 //Patch 只會修改有更改的地方
-app.patch("/students/:_id", async (req, res) => {
+router.patch("/:_id", async (req, res) => {
   try {
     let { _id } = req.params;
     //coding小技巧運用處
@@ -144,7 +113,7 @@ app.patch("/students/:_id", async (req, res) => {
 });
 
 //Delete
-app.delete("/students/:_id", async (req, res) => {
+router.delete("/:_id", async (req, res) => {
   try {
     let { _id } = req.params;
     let deleteResult = await Student.deleteOne({ _id });
@@ -154,12 +123,4 @@ app.delete("/students/:_id", async (req, res) => {
   }
 });
 
-app.use((err, req, res, next) => {
-  console.log("正在使用這個middleware");
-  return res.status(400).render("student-not-found");
-});
-
-//監聽
-app.listen(3000, () => {
-  console.log("伺服器在3000上運行");
-});
+module.exports = router;

@@ -15,15 +15,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="/">首頁</a></li>
-
+        <!-- 沒登入看得到的部分 -->
+        <% if (!user) { %>
         <li class="nav-item">
           <a class="nav-link" href="/auth/login">會員登入</a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link" href="/auth/signup">註冊會員</a>
         </li>
-
+        <% } %>
+        <!-- 登入後才看得到的部分 -->
+        <% if (user) { %>
         <li class="nav-item">
           <a class="nav-link" href="/auth/logout">登出系統</a>
         </li>
@@ -33,6 +35,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/profile/post">製作新的Post</a>
         </li>
+        <% } %>
       </ul>
     </div>
   </div>

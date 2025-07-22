@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     requied: true,
-    minLength: 3,
+    minLength: 1,
     maxLength: 255,
   },
   googleID: {

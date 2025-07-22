@@ -2,6 +2,8 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
 const User = require("../models/user-model");
+const localStrategy = require("passport-local");
+const bcrypt = require("bcrypt");
 
 passport.serializeUser((user, done) => {
   console.log("序列化Serializ使用者...");
@@ -17,6 +19,7 @@ passport.deserializeUser(async (_id, done) => {
   done(null, foundUser); //將req.user這個屬型設定為foundUser
 });
 
+//Google Auth login
 passport.use(
   new GoogleStrategy(
     {
@@ -46,4 +49,21 @@ passport.use(
       }
     }
   )
+);
+
+//Local Auth login
+passport.use(
+  new localStrategy(async (username, password, done) => {
+    let foundUser = await User.findOne({ email: username });
+    if (foundUser) {
+      let result = await bcrypt.compare(password, foundUser.password);
+      if (result) {
+        done(null, foundUser); //有找到的化就等於成功了，並到上面序列化
+      } else {
+        done(null, false);
+      }
+    } else {
+      done(null, false); //若沒找到登入或失敗
+    }
+  })
 );

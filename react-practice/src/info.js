@@ -1,17 +1,11 @@
 import React from "react";
+import "./styles/styles.css";
 
-const Info = () => {
-  let friends = ["小名", "小滑", "小張"];
+const Info = ({ name, age }) => {
   return (
-    <div>
-      <p>我的朋友們是: </p>
-      {friends.map((friend) => {
-        return <p>我的朋友有{friend}</p>;
-      })}
-
-      <h1>{5 * 10}</h1>
-      <h1>{5 / 10}</h1>
-      <h1>{Math.random()}</h1>
+    <div className="info">
+      <h1>朋友名稱:{name}</h1>
+      <h1>朋友年齡:{age}</h1>
     </div>
   );
 };

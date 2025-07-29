@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/styles.css";
 
-const Info = ({ name, age }) => {
+//state 是狀態的意思
+const Info = ({ message, setMessages }) => {
   return (
     <div className="info">
-      <h1>朋友名稱:{name}</h1>
-      <h1>朋友年齡:{age}</h1>
+      {message.map((message, index) => {
+        return <p key={index}>學習內容是{message}</p>;
+      })}
     </div>
   );
 };
 
 export default Info;
+
+//arr.forEach()

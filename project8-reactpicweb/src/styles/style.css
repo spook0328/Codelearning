@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -23,11 +23,11 @@ ul {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 4rem;
 }
 
@@ -35,12 +35,12 @@ ul {
   padding: 0.5rem 0.75rem;
   font-size: 1.5rem;
   border: none;
-  background-color: #bafcb5;
+  background-color: #373837;
   cursor: pointer;
 }
 
 nav {
-  background-color: #e4ffe2;
+  background-color: #565756;
 }
 
 nav ul {
@@ -48,8 +48,8 @@ nav ul {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   margin-right: 2rem;
 }
 
@@ -66,11 +66,11 @@ nav ul li a {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 3rem 0rem;
 }
 
@@ -78,11 +78,11 @@ nav ul li a {
 .search button {
   font-size: 2rem;
   padding: 0.25rem;
-  border: 3px solid #bafcb5;
+  border: 3px solid #373837;
 }
 
 .search button {
-  background-color: #bafcb5;
+  background-color: #969796;
 }
 
 .footer {
@@ -90,13 +90,13 @@ nav ul li a {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 1.25rem;
-  background-color: #e4ffe2;
+  background-color: #565756;
   min-height: 10vh;
 }
 
@@ -105,13 +105,13 @@ nav ul li a {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .pictures .picture {
@@ -128,13 +128,13 @@ nav ul li a {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .pictures .picture .imageContainer img:hover {
   -webkit-transform: scale(1.25);
-          transform: scale(1.25);
+  transform: scale(1.25);
 }
 /*# sourceMappingURL=style.css.map */

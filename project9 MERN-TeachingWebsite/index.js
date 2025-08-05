@@ -1,0 +1,19 @@
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+
+//連接Mongoose
+mongoose
+  .connect("mongodb://localhost:27017/GooleDB")
+  .then(() => {
+    console.log("connecting to mongoDB");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+//middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));

@@ -6,9 +6,9 @@ dotenv.config();
 
 //連接Mongoose
 mongoose
-  .connect("mongodb://localhost:27017/GooleDB")
+  .connect("mongodb://localhost:27017/mernDB")
   .then(() => {
-    console.log("connecting to mongoDB");
+    console.log("connecting to mongoDB...");
   })
   .catch((e) => {
     console.log(e);
@@ -17,3 +17,5 @@ mongoose
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.listen(8080, console.log("後端伺服器聆聽在port8080"));

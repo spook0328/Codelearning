@@ -14,7 +14,7 @@ const registerValidation = (data) => {
 
 //登入
 const loginValidation = (data) => {
-  const sschema = Joi.object({
+  const schema = Joi.object({
     email: Joi.string().min(6).max(50).required().email(),
     password: Joi.string().min(6).max(250).required(),
   });
@@ -23,8 +23,8 @@ const loginValidation = (data) => {
 
 //課程
 const courseValidation = (data) => {
-  const sschema = Joi.object({
-    title: Joi.string().min(6).max(50).required().email(),
+  const schema = Joi.object({
+    title: Joi.string().min(6).max(50).required(),
     description: Joi.string().min(6).max(50).required(),
     price: Joi.number().min(10).max(9999).required(),
   });

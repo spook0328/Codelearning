@@ -7,6 +7,7 @@ const authRoute = require("./routes").auth;
 const courseRoute = require("./routes").course;
 const passport = require("passport");
 require("./config/passport")(passport);
+const cors = require("cors");
 
 //連接Mongoose
 mongoose
@@ -21,6 +22,7 @@ mongoose
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use("/api/user", authRoute);
 //只有登入系統的人，才能新增課程或是註冊課程，要查看是不是有被jwt保護 是不是有有效的webtoken

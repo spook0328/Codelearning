@@ -1,7 +1,6 @@
 // 註冊用的
 import React, { useState } from "react";
 import AuthService from "../services/auth.service";
-import e from "express";
 
 const RegisterComponent = () => {
   let [username, setUsername] = useState("");

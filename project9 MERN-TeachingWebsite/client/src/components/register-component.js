@@ -1,12 +1,15 @@
 // 註冊用的
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const RegisterComponent = () => {
+  const navigate = useNavigate();
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [role, setRole] = useState("");
+  let [message, setMessage] = useState("");
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -24,15 +27,18 @@ const RegisterComponent = () => {
     AuthService.register(username, email, password, role)
       .then(() => {
         window.alert("註冊成功，將導向至登入頁面...");
+        navigate("/login");
       })
       .catch((e) => {
-        console.log(e);
+        setMessage(e.response.data);
       });
   };
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       <div>
+        {/* a && b，這樣的寫法，會讓false value 變 true value 的時候才會出現 */}
+        {message && <div className="alert alert-danger">{message}</div>}
         <div>
           <label htmlFor="username">用戶名稱:</label>
           <input

@@ -5,8 +5,13 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/user";
 
 class AuthServcice {
-  login() {}
-  logout() {}
+  login(email, password) {
+    return axios.post(API_URL + "/login", { email, password });
+  }
+  logout() {
+    // 登出直接把本地儲存的webtoken刪除，就無法操作登入
+    localStorage.removeItem("user");
+  }
   register(username, email, password, role) {
     //axios post 需要變成(網址{需要的參數})，這樣的形式包起來。
     return axios.post(API_URL + "/register", {
@@ -15,6 +20,10 @@ class AuthServcice {
       password,
       role,
     });
+  }
+
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem("user"));
   }
 }
 

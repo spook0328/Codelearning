@@ -6,9 +6,10 @@ import RegisterComponent from "./components/register-component";
 import LoginComponent from "./components/login-component";
 import ProfileCompnent from "./components/profile-component";
 import AuthService from "./services/auth.service";
+import CourseComponent from "./components/course-component";
 
 function App() {
-  let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   return (
     <BrowserRouter>
       <Routes>
@@ -33,6 +34,15 @@ function App() {
             path="profile"
             element={
               <ProfileCompnent
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+              />
+            }
+          />
+          <Route
+            path="course"
+            element={
+              <CourseComponent
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
               />

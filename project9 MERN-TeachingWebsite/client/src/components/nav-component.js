@@ -15,7 +15,7 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -23,7 +23,7 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNav">
@@ -41,7 +41,6 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                     </Link>
                   </li>
                 )}
-
                 {!currentUser && (
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">
@@ -49,7 +48,6 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                     </Link>
                   </li>
                 )}
-
                 {currentUser && (
                   <li className="nav-item">
                     <Link onClick={handleLogout} className="nav-link" to="/">
@@ -57,7 +55,6 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                     </Link>
                   </li>
                 )}
-
                 {currentUser && (
                   <li className="nav-item">
                     <Link className="nav-link" to="/profile">
@@ -65,7 +62,6 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                     </Link>
                   </li>
                 )}
-
                 {currentUser && (
                   <li className="nav-item">
                     <Link className="nav-link" to="/course">
@@ -73,16 +69,15 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                     </Link>
                   </li>
                 )}
-                {/* 下面其實可以不用血currentUser直接role就可以，但為了邏輯清楚 */}
-                {currentUser && currentUser?.user?.role == "instructor" && (
+
+                {currentUser && currentUser.user.role == "instructor" && (
                   <li className="nav-item">
                     <Link className="nav-link" to="/postCourse">
                       新增課程
                     </Link>
                   </li>
                 )}
-                {/*這裡的就拿掉了，把code簡單化*/}
-                {currentUser && currentUser?.user?.role == "student" && (
+                {currentUser && currentUser.user.role == "student" && (
                   <li className="nav-item">
                     <Link className="nav-link" to="/enroll">
                       註冊課程

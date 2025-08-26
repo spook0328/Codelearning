@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CourseService from "../services/course.service";
+import CourseService from "../services/courses.service";
 
 const PostCourseComponent = (props) => {
   let { currentUser, setCurrentUser } = props;

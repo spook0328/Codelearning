@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CourseService from "../services/course.service";
+import CourseService from "../services/courses.service";
 
 const EnrollComponent = (props) => {
   let { currentUser, setCurrentUser } = props;
@@ -38,21 +38,21 @@ const EnrollComponent = (props) => {
     <div style={{ padding: "3rem" }}>
       {!currentUser && (
         <div>
-          <p>You must login first before searching for courses.</p>
+          <p>你必須先登入才能註冊課程</p>
           <button
             className="btn btn-primary btn-lg"
             onClick={handleTakeToLogin}
           >
-            Take me to login page.
+            回到登入頁面。
           </button>
         </div>
       )}
-      {currentUser && currentUser.user.role == "instructor" && (
+      {currentUser && currentUser?.user?.role == "instructor" && (
         <div>
-          <h1>Only students can enroll in courses.</h1>
+          <h1>只有學生可以註冊此課程</h1>
         </div>
       )}
-      {currentUser && currentUser.user.role == "student" && (
+      {currentUser && currentUser?.user?.role == "student" && (
         <div className="search input-group mb-3">
           <input
             onChange={handleChangeInput}
@@ -74,6 +74,9 @@ const EnrollComponent = (props) => {
                 <p className="card-text">{course.description}</p>
                 <p>價格: {course.price}</p>
                 <p>目前的學生人數: {course.students.length}</p>
+                <p style={{ margin: "0.5rem 0rem" }}>
+                  講師: {course.instructor.username}
+                </p>
                 <a
                   href="#"
                   onClick={handleEnroll}

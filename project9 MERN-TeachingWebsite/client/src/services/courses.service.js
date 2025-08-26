@@ -48,6 +48,21 @@ class CourseService {
       },
     });
   }
+
+  //學生使用課程名稱找尋課程
+  getCourseByName(name) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    return axios.get(API_URL + "/findByName/" + name, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  }
 }
 
 export default new CourseService();

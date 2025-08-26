@@ -7,12 +7,13 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
   const handleTakeToLogin = () => {
     navigate("/login");
   };
-  const [courseData, setCourseData] = useState(null);
+  const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
     let _id;
+
     if (currentUser) {
-      _id = currentUser.user.role;
+      _id = currentUser.user._id;
       if (currentUser.user.role == "instructor") {
         CoursesService.get(_id)
           .then((data) => {
@@ -21,7 +22,7 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
           .catch((e) => {
             console.log(e);
           });
-      } else if (currentUser.user.role == "student") {
+      } else if (currentUser?.user?.role == "student") {
         CoursesService.getEnrolledCourses(_id)
           .then((data) => {
             setCourseData(data.data);
@@ -31,7 +32,8 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
           });
       }
     }
-  }, []);
+  }, [currentUser]);
+  //第二個[]也加入 currentUser，這樣登入後也會重新跑
 
   return (
     <div style={{ padding: "3rem" }}>
@@ -46,12 +48,12 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
           </button>
         </div>
       )}
-      {currentUser.user.role === "instructor" && (
+      {currentUser?.user?.role === "instructor" && (
         <div>
           <h1>歡迎來到講師頁面</h1>
         </div>
       )}
-      {currentUser.user.role === "student" && (
+      {currentUser?.user?.role === "student" && (
         <div>
           <h1>歡迎來到學生頁面</h1>
         </div>

@@ -37,7 +37,7 @@ router.get("/student/:_student_id", async (req, res) => {
   let coursesFound = await Course.find({ students: _student_id })
     .populate("instructor", ["username", "email"])
     .exec();
-  return res.send(courseFound);
+  return res.send(coursesFound);
 });
 
 //用課程名稱尋找課程
@@ -90,6 +90,20 @@ router.post("/", async (req, res) => {
     return res.send("新課程已保存");
   } catch (e) {
     return res.status(500).send("無法創建課程...");
+  }
+});
+
+//讓學生透過id註冊新課程
+router.post("/enroll/:_id", async (req, res) => {
+  let { _id } = req.params;
+  try {
+    let course = await Course.findOne({ _id }).exec();
+    //這個route 已知已被 jwt 保護
+    course.students.push(req.user._id);
+    await course.save();
+    res.send("註冊成功");
+  } catch (e) {
+    return res.send(e);
   }
 });
 

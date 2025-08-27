@@ -11,7 +11,7 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
 
   useEffect(() => {
     let _id;
-
+    //看到教師開課和學生課表
     if (currentUser) {
       _id = currentUser.user._id;
       if (currentUser.user.role == "instructor") {

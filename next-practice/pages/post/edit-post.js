@@ -1,3 +1,9 @@
+import Layout from "../../components/layout";
+
 export default function EditPost() {
-  return <h1>這是Edit Post頁面</h1>;
+  return (
+    <Layout returnBack>
+      <h1>這是Edit Post頁面</h1>
+    </Layout>
+  );
 }

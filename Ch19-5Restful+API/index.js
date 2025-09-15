@@ -122,6 +122,6 @@ app.delete("/students/:_id", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("伺服器正在聆聽port 3000");
+app.listen(8080, () => {
+  console.log("伺服器正在聆聽port 8080");
 });

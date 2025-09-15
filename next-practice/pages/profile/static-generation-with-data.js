@@ -1,6 +1,6 @@
 //function名稱 一定是getStaticProps()
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:3000/students");
+  const response = await fetch("http://localhost:8080/students");
   const data = await response.json();
 
   //getStaticProps()一定要return一個物件
